@@ -1,0 +1,24 @@
+---
+import { SITE } from '../config/site';
+
+const icons: Record<string, string> = {
+  instagram:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
+  youtube:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2-2C18.9 4.2 12 4.2 12 4.2s-6.9 0-8.54.5a2.9 2.9 0 0 0-2 2C1 8.4 1 12 1 12s0 3.6.46 5.3a2.9 2.9 0 0 0 2 2c1.64.5 8.54.5 8.54.5s6.9 0 8.54-.5a2.9 2.9 0 0 0 2-2C23 15.6 23 12 23 12zM9.75 15.5v-7l6 3.5-6 3.5z"/></svg>',
+  tiktok:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v13.6a2.9 2.9 0 1 1-2.05-2.77V9.7a6 6 0 1 0 5.05 5.9V8.9a7.6 7.6 0 0 0 4.5 1.46V7.35A4.6 4.6 0 0 1 16.5 2z"/></svg>',
+  facebook:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.9.25-1.5 1.55-1.5H17V3.3C16.65 3.25 15.5 3.15 14.15 3.15c-2.8 0-4.65 1.7-4.65 4.8v2.85H6.8V13.8h2.7v8h4z"/></svg>',
+  linkedin:
+    '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 6.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM5 8.5h4V20H5zM12 8.5h3.8v1.57h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.78 2.65 4.78 6.1V20h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.86V20h-4z"/></svg>',
+};
+
+const entries = Object.entries(SITE.social);
+---
+
+<div class="social-links">
+  {entries.map(([key, url]) => (
+    <a href={url} target="_blank" rel="noopener noreferrer" aria-label={key} set:html={icons[key]} />
+  ))}
+</div>

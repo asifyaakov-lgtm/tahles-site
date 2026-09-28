@@ -1,0 +1,64 @@
+---
+import { SITE, SEGMENT_OPTIONS } from '../config/site';
+
+interface Props {
+  compact?: boolean;
+  title?: string;
+  subtitle?: string;
+  idSuffix?: string;
+}
+
+const {
+  compact = false,
+  title = 'שלושים יום, שלושים כלי AI - ישר למייל',
+  subtitle = 'מדריך חדש כל כמה ימים, בלי ספאם, אפשר להסיר בלחיצה אחת.',
+  idSuffix = '',
+} = Astro.props;
+
+const hasProvider = SITE.emailSignupAction.trim().length > 0;
+const formId = `signup-form${idSuffix ? '-' + idSuffix : ''}`;
+---
+
+<div class={`signup-block ${compact ? 'compact' : ''}`}>
+  <h3>{title}</h3>
+  <p class="sub">{subtitle}</p>
+
+  {hasProvider ? (
+    <form id={formId} class="signup-form" method="POST" action={SITE.emailSignupAction}>
+      <div class="row-2">
+        <div>
+          <label for={`${formId}-name`}>שם</label>
+          <input id={`${formId}-name`} name="name" type="text" required autocomplete="name" />
+        </div>
+        <div>
+          <label for={`${formId}-email`}>אימייל</label>
+          <input id={`${formId}-email`} name="email" type="email" required autocomplete="email" />
+        </div>
+      </div>
+      <div>
+        <label for={`${formId}-segment`}>מה מתאר אתכם הכי טוב?</label>
+        <select id={`${formId}-segment`} name="segment" required>
+          <option value="" selected disabled>בחרו אפשרות</option>
+          {SEGMENT_OPTIONS.map((opt) => (
+            <option value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
+      </div>
+      <label class="consent-row">
+        <input type="checkbox" name="consent" required />
+        <span>
+          קראתי ואני מאשר/ת את <a href="/privacy">מדיניות הפרטיות</a> ומסכים/ה לקבל תוכן שיווקי במייל.
+        </span>
+      </label>
+      <button type="submit" class="btn btn-primary">הרשמה חינם</button>
+      <p class="form-status" data-form-status></p>
+    </form>
+  ) : (
+    <div class="signup-coming-soon">
+      <strong>נרשמים בקרוב 🔜</strong>
+      <p style="margin: 8px 0 0;">
+        טופס ההרשמה מתחבר עוד רגע. בינתיים אפשר לעקוב באינסטגרם או בטיקטוק (בפוטר) כדי לא לפספס.
+      </p>
+    </div>
+  )}
+</div>

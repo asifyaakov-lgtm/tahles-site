@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+}
+
+const { guide } = Astro.props;
+const { title, day, promise, sample } = guide.data;
+---
+
+<a href={`/guides/${guide.slug}`} class="guide-card">
+  {sample && <span class="sample-badge">מדריך לדוגמה</span>}
+  <span class="day-badge">יום {day} מתוך 30</span>
+  <h3>{title}</h3>
+  <p>{promise}</p>
+</a>

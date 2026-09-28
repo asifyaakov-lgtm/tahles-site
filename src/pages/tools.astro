@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+interface ToolRow {
+  name: string;
+  usage: string;
+  price: string;
+  link: string;
+}
+
+interface ToolArea {
+  area: string;
+  rows: ToolRow[];
+}
+
+// PLACEHOLDER DATA — 3 example rows per area, for Asif to replace with real, vetted tools
+// before publishing. Keep the table structure (columns + areas); just swap row content.
+const AREAS: ToolArea[] = [
+  {
+    area: 'שיווק',
+    rows: [
+      { name: 'שם כלי לדוגמה 1', usage: 'תיאור קצר של מה הכלי עושה לתחום השיווק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 2', usage: 'תיאור קצר של מה הכלי עושה לתחום השיווק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 3', usage: 'תיאור קצר של מה הכלי עושה לתחום השיווק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+    ],
+  },
+  {
+    area: 'מכירות',
+    rows: [
+      { name: 'שם כלי לדוגמה 1', usage: 'תיאור קצר של מה הכלי עושה לתחום המכירות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 2', usage: 'תיאור קצר של מה הכלי עושה לתחום המכירות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 3', usage: 'תיאור קצר של מה הכלי עושה לתחום המכירות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+    ],
+  },
+  {
+    area: 'שירות לקוחות',
+    rows: [
+      { name: 'שם כלי לדוגמה 1', usage: 'תיאור קצר של מה הכלי עושה לשירות לקוחות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 2', usage: 'תיאור קצר של מה הכלי עושה לשירות לקוחות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 3', usage: 'תיאור קצר של מה הכלי עושה לשירות לקוחות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+    ],
+  },
+  {
+    area: 'הנהלת חשבונות',
+    rows: [
+      { name: 'שם כלי לדוגמה 1', usage: 'תיאור קצר של מה הכלי עושה להנהלת חשבונות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 2', usage: 'תיאור קצר של מה הכלי עושה להנהלת חשבונות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 3', usage: 'תיאור קצר של מה הכלי עושה להנהלת חשבונות', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+    ],
+  },
+  {
+    area: 'תפעול',
+    rows: [
+      { name: 'שם כלי לדוגמה 1', usage: 'תיאור קצר של מה הכלי עושה לתפעול העסק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 2', usage: 'תיאור קצר של מה הכלי עושה לתפעול העסק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+      { name: 'שם כלי לדוגמה 3', usage: 'תיאור קצר של מה הכלי עושה לתפעול העסק', price: 'חינמי / בתשלום - לעדכן', link: '#' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="טבלת כלי AI לעסקים קטנים"
+  description="טבלת כלי בינה מלאכותית לעסקים קטנים, מסודרת לפי תחום: שיווק, מכירות, שירות לקוחות, הנהלת חשבונות ותפעול."
+>
+  <section class="section" style="padding-top: 56px;">
+    <div class="container">
+      <div class="section-heading">
+        <h1>טבלת כלי AI לעסקים קטנים</h1>
+        <p>
+          כלים מסודרים לפי תחום בעסק. <strong>השורות כרגע הן דוגמה בלבד</strong> -
+          <span class="placeholder-pill">Placeholder</span> ומיועדות להחלפה בכלים אמיתיים שנבדקו.
+        </p>
+      </div>
+
+      {AREAS.map((areaGroup) => (
+        <div style="margin-bottom: 40px;">
+          <div class="tools-table-wrap">
+            <table class="tools-table">
+              <thead>
+                <tr>
+                  <th colspan="4" style="background: transparent; padding-bottom: 0; border-bottom: none;">
+                    <h2 style="margin: 12px 0;">{areaGroup.area}</h2>
+                  </th>
+                </tr>
+                <tr>
+                  <th>כלי</th>
+                  <th>למה משתמשים בו</th>
+                  <th>מחיר</th>
+                  <th>קישור</th>
+                </tr>
+              </thead>
+              <tbody>
+                {areaGroup.rows.map((row) => (
+                  <tr>
+                    <td>{row.name} <span class="placeholder-pill">דוגמה</span></td>
+                    <td>{row.usage}</td>
+                    <td>{row.price}</td>
+                    <td><a href={row.link}>קישור</a></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

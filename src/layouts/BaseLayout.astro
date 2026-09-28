@@ -1,0 +1,76 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <Seo title={title} description={description} image={image} noindex={noindex} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Copy-to-clipboard for guide prompt boxes (event delegation, works for every
+      // prompt box on the page without per-instance wiring).
+      document.addEventListener('click', async (event) => {
+        const target = event.target as HTMLElement;
+        const btn = target.closest('.prompt-copy-btn') as HTMLButtonElement | null;
+        if (!btn) return;
+
+        const box = btn.closest('.prompt-box') as HTMLElement | null;
+        const text = box?.dataset.promptText || '';
+
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const helper = document.createElement('textarea');
+          helper.value = text;
+          helper.style.position = 'fixed';
+          helper.style.opacity = '0';
+          document.body.appendChild(helper);
+          helper.select();
+          document.execCommand('copy');
+          document.body.removeChild(helper);
+        }
+
+        const original = btn.textContent;
+        btn.textContent = 'הועתק ✓';
+        btn.dataset.copied = 'true';
+        window.setTimeout(() => {
+          btn.textContent = original;
+          btn.dataset.copied = 'false';
+        }, 1800);
+      });
+    </script>
+  </body>
+</html>

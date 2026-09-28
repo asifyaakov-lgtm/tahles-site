@@ -1,0 +1,27 @@
+---
+import SocialLinks from './SocialLinks.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom: 10px;">
+          <span class="dot"></span>
+          <span>תכל'ס AI</span>
+        </div>
+        <p style="max-width: 340px; font-size: 0.92rem;">
+          עוזר לבעלי עסקים להישאר צעד אחד לפני כולם בעולם הבינה המלאכותית - בחינם, בלי מנוי.
+        </p>
+      </div>
+      <div>
+        <SocialLinks />
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© {year} תכל'ס AI. כל הזכויות שמורות.</span>
+      <a href="/privacy">מדיניות פרטיות</a>
+    </div>
+  </div>
+</footer>

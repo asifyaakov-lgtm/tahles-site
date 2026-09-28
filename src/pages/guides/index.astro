@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.day - b.data.day
+);
+---
+
+<BaseLayout
+  title="כל המדריכים"
+  description="30 מדריכי AI פרקטיים לבעלי עסקים קטנים ובינוניים בישראל - אחד ליום, בלי ז'רגון, בחינם."
+>
+  <section class="section" style="padding-top: 56px;">
+    <div class="container">
+      <div class="section-heading">
+        <h1>כל המדריכים</h1>
+        <p>30 יום · 30 כלי AI לעסק שלך. לוחצים על מדריך ומתחילים.</p>
+      </div>
+      <div class="card-grid">
+        {allGuides.map((guide) => (
+          <GuideCard guide={guide} />
+        ))}
+      </div>
+      {allGuides.length === 0 && (
+        <p style="text-align:center; color: var(--text-dim);">אין עדיין מדריכים פורסמים.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

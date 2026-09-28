@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import GuideCard from './GuideCard.astro';
+
+interface Props {
+  guides: CollectionEntry<'guides'>[];
+}
+
+const { guides } = Astro.props;
+---
+
+{guides.length > 0 && (
+  <div class="related-guides">
+    <div class="section-heading" style="margin-bottom: 24px;">
+      <h2>אולי גם זה יעניין אותך?</h2>
+    </div>
+    <div class="card-grid">
+      {guides.map((guide) => (
+        <GuideCard guide={guide} />
+      ))}
+    </div>
+  </div>
+)}

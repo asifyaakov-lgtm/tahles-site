@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WavyLines from '../components/WavyLines.astro';
+import GuideCard from '../components/GuideCard.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../config/site';
+
+const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.day - b.data.day
+);
+---
+
+<BaseLayout title={SITE.name} description={SITE.description}>
+  <section class="hero glow-backdrop">
+    <WavyLines />
+    <div class="container">
+      <span class="badge">בינה מלאכותית לעסקים קטנים ובינוניים</span>
+      <h1>
+        <span class="gradient-text">{SITE.tagline}</span>
+      </h1>
+      <p class="lead">{SITE.promiseLine} 30 מדריכים פרקטיים, אחד ליום, בלי ז'רגון.</p>
+      <div class="actions">
+        <a href="/guides" class="btn btn-primary">לכל המדריכים</a>
+        <a href="/tools" class="btn btn-outline">טבלת כלי AI</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="signup-block" style="max-width: 760px; margin: 0 auto; text-align: center;">
+        <h3>{SITE.whoIAm}</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <h2>30 יום · 30 כלי AI לעסק שלך</h2>
+        <p>מדריך פרקטי אחד בכל פעם - מה לעשות, איך, ועם איזה פרומפט בדיוק.</p>
+      </div>
+      <div class="card-grid">
+        {allGuides.map((guide) => (
+          <GuideCard guide={guide} />
+        ))}
+      </div>
+      {allGuides.length === 0 && (
+        <p style="text-align:center; color: var(--text-dim);">המדריך הראשון בדרך - חוזרים בקרוב.</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <EmailSignup />
+    </div>
+  </section>
+</BaseLayout>

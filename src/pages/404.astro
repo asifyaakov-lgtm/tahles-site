@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WavyLines from '../components/WavyLines.astro';
+---
+
+<BaseLayout title="הדף לא נמצא" description="הדף שחיפשתם לא קיים." noindex={true}>
+  <section class="error-page glow-backdrop">
+    <WavyLines />
+    <div class="container">
+      <div class="code gradient-text">404</div>
+      <h1>הדף הזה לא נמצא</h1>
+      <p style="color: var(--text-dim); margin-bottom: 32px;">
+        ייתכן שהקישור השתנה או שהדף הוסר. אפשר לחזור לעמוד הבית או לעבור על המדריכים.
+      </p>
+      <div class="actions">
+        <a href="/" class="btn btn-primary">בית</a>
+        <a href="/guides" class="btn btn-outline">כל המדריכים</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
