@@ -1074,3 +1074,19 @@ table.tools-table {
     text-align: center;
   }
 }
+
+/* ---------- hero lead: promise always on its own line ---------- */
+.hero .lead {
+  max-width: 760px;
+}
+
+.lead-line {
+  display: block;
+  text-wrap: balance;
+}
+
+.lead-promise {
+  margin-top: 6px;
+  color: var(--text);
+  font-weight: 600;
+}
