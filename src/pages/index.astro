@@ -3,26 +3,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WavyLines from '../components/WavyLines.astro';
 import GuideCard from '../components/GuideCard.astro';
 import EmailSignup from '../components/EmailSignup.astro';
+import EmptyState from '../components/EmptyState.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
 
 const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.day - b.data.day
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
+const latest = allGuides.slice(0, 6);
 ---
 
 <BaseLayout title={SITE.name} description={SITE.description}>
   <section class="hero glow-backdrop">
     <WavyLines />
     <div class="container">
-      <span class="badge">בינה מלאכותית לעסקים קטנים ובינוניים</span>
+      <span class="badge">בינה מלאכותית לבעלי עסקים</span>
       <h1>
         <span class="gradient-text">{SITE.tagline}</span>
       </h1>
-      <p class="lead">{SITE.promiseLine} 30 מדריכים פרקטיים, אחד ליום, בלי ז'רגון.</p>
+      <p class="secondary-line">{SITE.secondaryLine}</p>
+      <p class="lead">{SITE.ongoingLine}. {SITE.promiseLine}</p>
       <div class="actions">
         <a href="/guides" class="btn btn-primary">לכל המדריכים</a>
-        <a href="/tools" class="btn btn-outline">טבלת כלי AI</a>
       </div>
     </div>
   </section>
@@ -38,16 +40,22 @@ const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sor
   <section class="section">
     <div class="container">
       <div class="section-heading">
-        <h2>30 יום · 30 כלי AI לעסק שלך</h2>
-        <p>מדריך פרקטי אחד בכל פעם - מה לעשות, איך, ועם איזה פרומפט בדיוק.</p>
+        <h2>המדריכים האחרונים</h2>
+        <p>כל מדריך: מה לעשות, איך, ועם איזה פרומפט בדיוק.</p>
       </div>
-      <div class="card-grid">
-        {allGuides.map((guide) => (
-          <GuideCard guide={guide} />
-        ))}
-      </div>
-      {allGuides.length === 0 && (
-        <p style="text-align:center; color: var(--text-dim);">המדריך הראשון בדרך - חוזרים בקרוב.</p>
+      {latest.length > 0 ? (
+        <div class="card-grid">
+          {latest.map((guide) => (
+            <GuideCard guide={guide} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState />
+      )}
+      {allGuides.length > latest.length && (
+        <p style="text-align:center; margin-top: 28px;">
+          <a href="/guides" class="btn btn-outline">לכל המדריכים</a>
+        </p>
       )}
     </div>
   </section>

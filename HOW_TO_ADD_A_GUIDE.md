@@ -1,17 +1,17 @@
 # איך להוסיף מדריך חדש
 
 כל מדריך הוא קובץ Markdown אחד בתיקייה `src/content/guides/`. אין צורך לגעת בשום קובץ קוד
-כדי להוסיף מדריך 2 עד 30 - רק להוסיף קובץ `.md` חדש.
+כדי להוסיף מדריך - רק להוסיף קובץ `.md` חדש. הספרייה גדלה ללא הגבלה (כל יום כלי אחד).
 
 ## שלב 1: קובץ חדש
 
-העתיקו את `src/content/guides/day-01-ai-customer-emails.md` לקובץ חדש, למשל:
+העתיקו את `src/content/guides/ai-customer-emails.md` (מדריך הדוגמה, מסומן `draft: true`) לקובץ חדש, למשל:
 
 ```
-src/content/guides/day-02-<slug-באנגלית>.md
+src/content/guides/<slug-באנגלית>.md
 ```
 
-שם הקובץ (בלי `.md`) הופך להיות כתובת ה-URL של המדריך: `/guides/day-02-<slug-באנגלית>`.
+שם הקובץ (בלי `.md`) הופך להיות כתובת ה-URL של המדריך: `/guides/<slug-באנגלית>` (בלי קידומת `day-NN-`).
 מומלץ שם קובץ באנגלית, kebab-case, בלי רווחים ובלי עברית.
 
 ## שלב 2: מלאו את ה-frontmatter
@@ -21,14 +21,15 @@ src/content/guides/day-02-<slug-באנגלית>.md
 ```yaml
 ---
 title: "כותרת המדריך - כשאלה או כהבטחה"
-day: 2                     # 1 עד 30
+category: לקוחות          # אופציונלי: לקוחות / שיווק / ניהול / עדכונים - תג + מסנן ב-/guides
+codeWord: "מילת קוד"       # אופציונלי: מילת התגובה של הסרטון התואם
 promise: "משפט אחד שמסביר מה הקורא יקבל מהמדריך הזה"
 description: "משפט ל-SEO/מטא-תיאור, יכול להיות דומה ל-promise"
-featuredImage: "/images/guides/day-02-featured.jpg"   # אופציונלי
+featuredImage: "/images/guides/my-guide-featured.jpg"   # אופציונלי
 featuredImageAlt: "תיאור התמונה לנגישות"                # אופציונלי
-publishDate: 2026-10-05
+publishDate: 2026-10-05   # קובע את הסדר: החדש ביותר ראשון
 summary: "פסקת סיכום קצרה שמופיעה בסוף המדריך"
-draft: false               # true = לא מתפרסם, לא מופיע בשום מקום באתר
+draft: false               # true = לא מתפרסם (מדריך הדוגמה נשאר draft), לא מופיע בשום מקום באתר
 sample: false               # תשאירו false - true מיועד רק למדריך הלדוגמה
 relatedGuides: []          # אופציונלי: רשימת slugs של מדריכים קשורים. אם ריק - האתר בוחר אוטומטית
 ---
@@ -64,13 +65,13 @@ relatedGuides: []          # אופציונלי: רשימת slugs של מדרי�
 בסוף השורה (ה-title):
 
 ```markdown
-![טקסט alt לנגישות](/images/guides/day-02-screenshot.jpg "הכיתוב שיוצג מתחת לתמונה")
+![טקסט alt לנגישות](/images/guides/my-guide-screenshot.jpg "הכיתוב שיוצג מתחת לתמונה")
 ```
 
 **כפתור הורדה** - פסקה שמכילה *רק* קישור לקובץ תחת `/downloads/`:
 
 ```markdown
-[הורידו את הקובץ (PDF)](/downloads/day-02-cheat-sheet.pdf)
+[הורידו את הקובץ (PDF)](/downloads/my-guide-cheat-sheet.pdf)
 ```
 
 **תיבת "מה זה לא עושה" (מגבלות)** - ציטוט (`>`) שמתחיל במילים `מה זה לא עושה`:
@@ -83,8 +84,8 @@ relatedGuides: []          # אופציונלי: רשימת slugs של מדרי�
 
 שימו את קבצי התמונה/PDF בתיקיית `public/`, למשל:
 
-- `public/images/guides/day-02-featured.jpg`
-- `public/downloads/day-02-cheat-sheet.pdf`
+- `public/images/guides/my-guide-featured.jpg`
+- `public/downloads/my-guide-cheat-sheet.pdf`
 
 הנתיב שאתם כותבים ב-Markdown/frontmatter מתחיל תמיד ב-`/` (לדוגמה `/images/guides/...`),
 בלי `public` בנתיב.
@@ -110,10 +111,14 @@ npm run dev
 
 ## עדכון טבלת "אולי גם זה יעניין אותך?"
 
-כברירת מחדל, האתר בוחר אוטומטית 4 מדריכים אחרים (הבאים לפי מספר היום) להצגה בסוף כל מדריך.
+כברירת מחדל, האתר בוחר אוטומטית עד 4 מדריכים אחרים (קודם מאותה קטגוריה, מהחדש לישן) להצגה בסוף כל מדריך.
 אם תרצו לבחור ידנית אילו מדריכים קשורים יוצגו, מלאו את `relatedGuides` ב-frontmatter עם רשימת
 שמות הקבצים (בלי `.md`) של המדריכים הרצויים:
 
 ```yaml
-relatedGuides: ["day-05-slug", "day-12-slug", "day-19-slug"]
+relatedGuides: ["slug-one", "slug-two", "slug-three"]
 ```
+
+## קישורים בין מדריכים
+
+קישור פנימי בגוף המדריך הוא פשוט `[טקסט](/guides/<slug>)`. אחרי `npm run build` אפשר לוודא שאין קישורים שבורים.

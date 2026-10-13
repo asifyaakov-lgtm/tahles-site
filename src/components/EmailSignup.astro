@@ -1,5 +1,6 @@
 ---
 import { SITE, SEGMENT_OPTIONS } from '../config/site';
+import FollowBlock from './FollowBlock.astro';
 
 interface Props {
   compact?: boolean;
@@ -10,8 +11,8 @@ interface Props {
 
 const {
   compact = false,
-  title = 'שלושים יום, שלושים כלי AI - ישר למייל',
-  subtitle = 'מדריך חדש כל כמה ימים, בלי ספאם, אפשר להסיר בלחיצה אחת.',
+  title = 'כל יום כלי אחד חדש - ישר למייל',
+  subtitle = 'מדריך חינם על כלי AI חדש לעסק, בלי ספאם, אפשר להסיר בלחיצה אחת.',
   idSuffix = '',
 } = Astro.props;
 
@@ -19,11 +20,10 @@ const hasProvider = SITE.emailSignupAction.trim().length > 0;
 const formId = `signup-form${idSuffix ? '-' + idSuffix : ''}`;
 ---
 
+{hasProvider ? (
 <div class={`signup-block ${compact ? 'compact' : ''}`}>
   <h3>{title}</h3>
   <p class="sub">{subtitle}</p>
-
-  {hasProvider ? (
     <form id={formId} class="signup-form" method="POST" action={SITE.emailSignupAction}>
       <div class="row-2">
         <div>
@@ -53,12 +53,7 @@ const formId = `signup-form${idSuffix ? '-' + idSuffix : ''}`;
       <button type="submit" class="btn btn-primary">הרשמה חינם</button>
       <p class="form-status" data-form-status></p>
     </form>
-  ) : (
-    <div class="signup-coming-soon">
-      <strong>נרשמים בקרוב 🔜</strong>
-      <p style="margin: 8px 0 0;">
-        טופס ההרשמה מתחבר עוד רגע. בינתיים אפשר לעקוב באינסטגרם או בטיקטוק (בפוטר) כדי לא לפספס.
-      </p>
-    </div>
-  )}
 </div>
+) : (
+  <FollowBlock />
+)}

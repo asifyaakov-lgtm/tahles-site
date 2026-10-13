@@ -9,9 +9,12 @@ interface Props {
   description: string;
   image?: string;
   noindex?: boolean;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description, image, noindex } = Astro.props;
+const { title, description, image, noindex, type, publishedTime, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -30,7 +33,15 @@ const { title, description, image, noindex } = Astro.props;
       rel="stylesheet"
     />
 
-    <Seo title={title} description={description} image={image} noindex={noindex} />
+    <Seo
+      title={title}
+      description={description}
+      image={image}
+      noindex={noindex}
+      type={type}
+      publishedTime={publishedTime}
+      jsonLd={jsonLd}
+    />
   </head>
   <body>
     <Header />

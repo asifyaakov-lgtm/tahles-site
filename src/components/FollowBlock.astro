@@ -1,0 +1,19 @@
+---
+import SocialLinks from './SocialLinks.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'עקבו אחריי',
+  subtitle = 'כל יום כלי אחד חדש לעסק, עם מדריך חינם. עקבו כדי לא לפספס.',
+} = Astro.props;
+---
+
+<div class="signup-block follow-block">
+  <h3>{title}</h3>
+  <p class="sub">{subtitle}</p>
+  <SocialLinks showLabels={true} />
+</div>

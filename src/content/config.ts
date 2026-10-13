@@ -1,12 +1,17 @@
 import { defineCollection, z } from 'astro:content';
+import { GUIDE_CATEGORIES } from '../config/site';
 
 const guides = defineCollection({
   type: 'content',
   schema: z.object({
     // Guide title, phrased as a question or a promise.
     title: z.string(),
-    // 1..30 — which day of the "30 יום · 30 כלי AI" series this is.
-    day: z.number().int().min(1).max(30),
+    // Optional running number, only for internal ordering notes. Not shown and not part of the URL.
+    day: z.number().int().min(1).optional(),
+    // The comment keyword of the matching video (e.g. the word viewers comment to get the guide).
+    codeWord: z.string().optional(),
+    // Topic badge + filter chip on /guides.
+    category: z.enum(GUIDE_CATEGORIES).optional(),
     // One-line hook shown on guide cards (home + /guides grid).
     promise: z.string(),
     // Used for <meta description> and the guide-card subtitle if longer copy is needed.
@@ -22,8 +27,8 @@ const guides = defineCollection({
     draft: z.boolean().default(false),
     // Marks the one example guide shipped with the template — shown with a "guide לדוגמה" badge.
     sample: z.boolean().default(false),
-    // Slugs of other guides to show in "אולי גם זה יעניין אותך?". Falls back to the next 3
-    // published guides by day number if omitted.
+    // Slugs of other guides to show in "אולי גם זה יעניין אותך?". Falls back to the newest
+    // published guides (same category first) if omitted.
     relatedGuides: z.array(z.string()).optional(),
   }),
 });

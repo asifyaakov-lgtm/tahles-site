@@ -6,12 +6,14 @@ interface Props {
 }
 
 const { guide } = Astro.props;
-const { title, day, promise, sample } = guide.data;
+const { title, promise, sample, category } = guide.data;
 ---
 
-<a href={`/guides/${guide.slug}`} class="guide-card">
-  {sample && <span class="sample-badge">מדריך לדוגמה</span>}
-  <span class="day-badge">יום {day} מתוך 30</span>
+<a href={`/guides/${guide.slug}`} class="guide-card" data-category={category ?? ''}>
+  <span class="card-badges">
+    {category && <span class="category-badge">{category}</span>}
+    {sample && <span class="sample-badge">מדריך לדוגמה</span>}
+  </span>
   <h3>{title}</h3>
   <p>{promise}</p>
 </a>

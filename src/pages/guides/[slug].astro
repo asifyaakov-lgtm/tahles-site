@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import EmailSignup from '../../components/EmailSignup.astro';
+import FollowBlock from '../../components/FollowBlock.astro';
 import RelatedGuides from '../../components/RelatedGuides.astro';
 import { SITE } from '../../config/site';
 
@@ -16,23 +17,49 @@ export async function getStaticPaths() {
 
 const { guide, allGuides } = Astro.props;
 const { Content, headings } = await guide.render();
-const { title, day, promise, description, featuredImage, featuredImageAlt, summary, sample } = guide.data;
+const { title, promise, description, featuredImage, featuredImageAlt, summary, sample, category, publishDate } = guide.data;
 
+const byNewest = (a: (typeof allGuides)[number], b: (typeof allGuides)[number]) =>
+  b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+const others = allGuides.filter((g) => g.slug !== guide.slug).sort(byNewest);
 const related = (
   guide.data.relatedGuides
     ? guide.data.relatedGuides
         .map((slug) => allGuides.find((g) => g.slug === slug))
         .filter((g): g is (typeof allGuides)[number] => Boolean(g))
-    : allGuides
-        .filter((g) => g.slug !== guide.slug)
-        .sort((a, b) => a.data.day - b.data.day)
+    : [...others.filter((g) => category && g.data.category === category), ...others.filter((g) => !category || g.data.category !== category)]
 ).slice(0, 4);
+
+// Article structured data. Image falls back to the site-wide og-default.jpg, same as <meta og:image>.
+const imageUrl = new URL(featuredImage ?? '/og-default.jpg', SITE.domain).toString();
+const pageUrl = new URL(`/guides/${guide.slug}`, SITE.domain).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  image: [imageUrl],
+  datePublished: publishDate.toISOString(),
+  dateModified: publishDate.toISOString(),
+  inLanguage: 'he',
+  mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+  author: { '@type': 'Person', name: 'אסיף יעקב', url: SITE.domain },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+  ...(category ? { articleSection: category } : {}),
+};
 ---
 
-<BaseLayout title={title} description={description} image={featuredImage}>
+<BaseLayout
+  title={title}
+  description={description}
+  image={featuredImage}
+  type="article"
+  publishedTime={publishDate}
+  jsonLd={jsonLd}
+>
   <section class="guide-hero">
     <div class="container">
-      <span class="badge">יום {day} מתוך 30</span>
+      {category && <span class="badge">{category}</span>}
       {sample && <span class="badge" style="margin-inline-start: 8px;">מדריך לדוגמה</span>}
       <h1 style="margin-top: 16px;">{title}</h1>
     </div>
@@ -41,7 +68,7 @@ const related = (
   <div class="container">
     {sample && (
       <div class="draft-banner">
-        זהו מדריך לדוגמה שמראה איך התבנית עובדת מקצה לקצה. אפשר להשתמש בו כבסיס למדריכים 2-30.
+        זהו מדריך לדוגמה שמראה איך התבנית עובדת מקצה לקצה. אפשר להשתמש בו כבסיס לכל מדריך חדש.
       </div>
     )}
 
@@ -64,36 +91,14 @@ const related = (
           <p style="color: var(--text-dim);">{summary}</p>
         </section>
 
-        <div class="next-step-block">
-          <h3>רוצים עוד כאלה?</h3>
-          <p style="color: var(--text-dim);">הצטרפו לקבוצת הוואטסאפ לעדכונים על מדריכים חדשים.</p>
-          <a href={SITE.whatsappGroupUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            הצטרפות לקבוצת הוואטסאפ
-          </a>
-        </div>
+        <FollowBlock />
 
-        <EmailSignup idSuffix="guide-main" />
+        {SITE.emailSignupAction.trim() && <EmailSignup idSuffix="guide-main" />}
 
         <div style="margin-top: 56px;">
           <RelatedGuides guides={related} />
         </div>
       </div>
-
-      <aside class="guide-sidebar">
-        <EmailSignup
-          idSuffix="guide-sidebar"
-          title="לא לפספס מדריך"
-          subtitle="מדריך חדש ישר למייל, בלי ספאם."
-        />
-      </aside>
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  @media (max-width: 900px) {
-    .guide-sidebar {
-      display: none;
-    }
-  }
-</style>

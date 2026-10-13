@@ -1,5 +1,6 @@
 ---
 import SocialLinks from './SocialLinks.astro';
+import { SITE } from '../config/site';
 const year = new Date().getFullYear();
 ---
 
@@ -12,16 +13,18 @@ const year = new Date().getFullYear();
           <span>תכל'ס AI</span>
         </div>
         <p style="max-width: 340px; font-size: 0.92rem;">
-          עוזר לבעלי עסקים להישאר צעד אחד לפני כולם בעולם הבינה המלאכותית - בחינם, בלי מנוי.
+          {SITE.secondaryLine} {SITE.promiseLine}
         </p>
       </div>
       <div>
         <SocialLinks />
+        <p style="margin: 14px 0 0; font-size: 0.92rem;">
+          <a href={`mailto:${SITE.contactEmail}`} dir="ltr" class="footer-email">{SITE.contactEmail}</a>
+        </p>
       </div>
     </div>
     <div class="footer-legal">
       <span>© {year} תכל'ס AI. כל הזכויות שמורות.</span>
-      <a href="/privacy">מדיניות פרטיות</a>
     </div>
   </div>
 </footer>

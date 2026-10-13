@@ -7,7 +7,8 @@ export default defineConfig({
   site: 'https://tahles.ai',
   output: 'static',
   trailingSlash: 'never',
-  integrations: [sitemap()],
+  // /tools and /privacy are unfinished placeholders: kept out of the sitemap (and noindex on the pages).
+  integrations: [sitemap({ filter: (page) => !/\/(tools|privacy)\/?$/.test(page) })],
   markdown: {
     // Syntax highlighting is disabled on purpose: the only fenced code blocks this site uses
     // are ```prompt blocks, which rehypeGuideComponents turns into copy-to-clipboard boxes -
