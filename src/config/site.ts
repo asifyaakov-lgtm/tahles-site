@@ -16,7 +16,7 @@ export const SITE = {
   contactEmail: 'Asif@tahles.ai',
 
   // Photo shown next to the "who I am" text. Path under /public; leave empty to hide the photo.
-  photo: '',
+  photo: '/images/asif.jpg',
   photoAlt: "אסיף יעקב, תכל'ס AI",
 
   // Consult CTA. Any URL (mailto:, https://wa.me/..., a booking page). Empty = button hidden.
