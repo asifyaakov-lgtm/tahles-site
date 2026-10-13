@@ -274,7 +274,7 @@ p {
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.4rem);
   max-width: 900px;
-  margin-inline: auto 0.5em;
+  margin: 0 auto 0.5em;
 }
 
 .hero .lead {
@@ -980,4 +980,97 @@ table.tools-table {
 
 .filter-chips[hidden] {
   display: none;
+}
+
+/* ---------- two-line tagline ---------- */
+.tagline-lines {
+  display: block;
+}
+
+.tagline-line {
+  display: block;
+}
+
+/* Each sentence stays on one line at every width: the headline shrinks instead of wrapping. */
+.hero h1:has(.tagline-lines) {
+  font-size: clamp(1.25rem, 6.8vw, 3.4rem);
+  margin-top: 18px;
+}
+
+.tagline-line {
+  white-space: nowrap;
+}
+
+/* ---------- about block (photo + who I am) ---------- */
+.about-block {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-block.has-photo {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  text-align: start;
+}
+
+.about-photo {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  background: var(--gradient) border-box;
+  box-shadow: 0 0 40px rgba(193, 60, 255, 0.45);
+}
+
+.about-block h3 {
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  .about-block.has-photo {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-photo {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* ---------- consult CTA ---------- */
+.consult-cta {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.about-block.has-photo .consult-cta {
+  text-align: start;
+}
+
+.btn-consult {
+  justify-content: center;
+  text-align: center;
+  line-height: 1.4;
+  white-space: normal;
+  text-wrap: balance;
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  .btn-consult {
+    display: flex;
+    width: 100%;
+    border-radius: 22px;
+    padding: 16px 20px;
+  }
+
+  .about-block.has-photo .consult-cta {
+    text-align: center;
+  }
 }

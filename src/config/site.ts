@@ -3,6 +3,8 @@ export const SITE = {
   nameEn: 'TAHLES',
   domain: 'https://tahles.ai',
   tagline: 'AI לא יחליף את העסק שלך. עסק שמשתמש ב-AI כן.',
+  // The tagline as a headline is always shown as exactly these two lines (never re-flowed).
+  taglineLines: ['AI לא יחליף את העסק שלך.', 'עסק שמשתמש ב-AI כן.'],
   secondaryLine: 'פחות רעש. יותר תוצאות.',
   ongoingLine: 'כל יום כלי אחד שלוקח את העסק שלך צעד קדימה, עם מדריך חינם',
   description:
@@ -12,6 +14,14 @@ export const SITE = {
   promiseLine: 'הכל בחינם, בלי מנוי, בלי קאץ׳.',
 
   contactEmail: 'Asif@tahles.ai',
+
+  // Photo shown next to the "who I am" text. Path under /public; leave empty to hide the photo.
+  photo: '',
+  photoAlt: "אסיף יעקב, תכל'ס AI",
+
+  // Consult CTA. Any URL (mailto:, https://wa.me/..., a booking page). Empty = button hidden.
+  consultUrl: 'mailto:Asif@tahles.ai?subject=%D7%94%D7%AA%D7%99%D7%99%D7%A2%D7%A6%D7%95%D7%AA%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7',
+  consultLabel: 'לחץ פה להתייעץ איך לוקחים את העסק שלך קדימה בעולם ה-AI',
 
   // Provider-agnostic email signup. Leave empty to show the "עקבו אחריי" social block instead
   // of a form that would silently drop submissions. Point this at the real MailerLite form

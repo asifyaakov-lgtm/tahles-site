@@ -5,6 +5,7 @@ import TableOfContents from '../../components/TableOfContents.astro';
 import EmailSignup from '../../components/EmailSignup.astro';
 import FollowBlock from '../../components/FollowBlock.astro';
 import RelatedGuides from '../../components/RelatedGuides.astro';
+import ConsultButton from '../../components/ConsultButton.astro';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -94,6 +95,8 @@ const jsonLd = {
         <FollowBlock />
 
         {SITE.emailSignupAction.trim() && <EmailSignup idSuffix="guide-main" />}
+
+        <ConsultButton />
 
         <div style="margin-top: 56px;">
           <RelatedGuides guides={related} />

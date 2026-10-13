@@ -1,0 +1,19 @@
+---
+import { SITE } from '../config/site';
+
+const url = SITE.consultUrl.trim();
+const external = /^https?:\/\//.test(url);
+---
+
+{url && (
+  <div class="consult-cta">
+    <a
+      href={url}
+      class="btn btn-primary btn-consult"
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener' : undefined}
+    >
+      {SITE.consultLabel}
+    </a>
+  </div>
+)}

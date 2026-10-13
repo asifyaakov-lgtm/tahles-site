@@ -4,6 +4,7 @@ import WavyLines from '../components/WavyLines.astro';
 import GuideCard from '../components/GuideCard.astro';
 import EmailSignup from '../components/EmailSignup.astro';
 import EmptyState from '../components/EmptyState.astro';
+import ConsultButton from '../components/ConsultButton.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '../config/site';
 
@@ -19,7 +20,11 @@ const latest = allGuides.slice(0, 6);
     <div class="container">
       <span class="badge">בינה מלאכותית לבעלי עסקים</span>
       <h1>
-        <span class="gradient-text">{SITE.tagline}</span>
+        <span class="gradient-text tagline-lines">
+          {SITE.taglineLines.map((line) => (
+            <span class="tagline-line">{line}</span>
+          ))}
+        </span>
       </h1>
       <p class="secondary-line">{SITE.secondaryLine}</p>
       <p class="lead">{SITE.ongoingLine}. {SITE.promiseLine}</p>
@@ -31,8 +36,14 @@ const latest = allGuides.slice(0, 6);
 
   <section class="section">
     <div class="container">
-      <div class="signup-block" style="max-width: 760px; margin: 0 auto; text-align: center;">
-        <h3>{SITE.whoIAm}</h3>
+      <div class={`signup-block about-block ${SITE.photo ? 'has-photo' : ''}`}>
+        {SITE.photo && (
+          <img class="about-photo" src={SITE.photo} alt={SITE.photoAlt} width="400" height="400" loading="lazy" />
+        )}
+        <div class="about-text">
+          <h3>{SITE.whoIAm}</h3>
+          <ConsultButton />
+        </div>
       </div>
     </div>
   </section>
