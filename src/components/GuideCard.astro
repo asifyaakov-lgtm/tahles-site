@@ -6,10 +6,13 @@ interface Props {
 }
 
 const { guide } = Astro.props;
-const { title, promise, sample, category } = guide.data;
+const { title, promise, sample, category, featuredImage, featuredImageAlt } = guide.data;
 ---
 
 <a href={`/guides/${guide.slug}`} class="guide-card" data-category={category ?? ''}>
+  {featuredImage && (
+    <img class="guide-card-image" src={featuredImage} alt={featuredImageAlt || ''} width="1600" height="900" loading="lazy" />
+  )}
   <span class="card-badges">
     {category && <span class="category-badge">{category}</span>}
     {sample && <span class="sample-badge">מדריך לדוגמה</span>}
