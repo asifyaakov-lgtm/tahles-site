@@ -20,6 +20,8 @@ const guides = defineCollection({
     // default gradient hero if not set.
     featuredImage: z.string().optional(),
     featuredImageAlt: z.string().optional(),
+    // 9:16 video cover shown in the guide hero next to the title (the video's thumbnail).
+    cover: z.string().optional(),
     publishDate: z.date(),
     // Short closing paragraph rendered in the template's own "סיכום" section, after the body.
     summary: z.string(),

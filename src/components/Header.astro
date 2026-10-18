@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../config/site';
 const { pathname } = Astro.url;
 
 const links = [
@@ -22,6 +23,9 @@ const links = [
             </a>
           </li>
         ))}
+        <li class="nav-consult-item">
+          <a href={SITE.consultUrl} class="nav-consult" target="_blank" rel="noopener">ייעוץ חינם</a>
+        </li>
       </ul>
     </nav>
   </div>

@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
 const { guide, allGuides } = Astro.props;
 const { Content, headings } = await guide.render();
-const { title, promise, description, featuredImage, featuredImageAlt, summary, sample, category, publishDate } = guide.data;
+const { title, promise, description, featuredImage, featuredImageAlt, cover, summary, sample, category, publishDate } = guide.data;
 
 const byNewest = (a: (typeof allGuides)[number], b: (typeof allGuides)[number]) =>
   b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
@@ -61,9 +61,22 @@ const jsonLd = {
 >
   <section class="guide-hero">
     <div class="container">
-      {category && <span class="badge">{category}</span>}
-      {sample && <span class="badge" style="margin-inline-start: 8px;">מדריך לדוגמה</span>}
-      <h1 style="margin-top: 16px;">{title}</h1>
+      <div class={`guide-hero-card${cover ? ' has-cover' : ''}`}>
+        <div class="guide-hero-text">
+          <div class="guide-hero-badges">
+            {category && <span class="badge">{category}</span>}
+            {sample && <span class="badge">מדריך לדוגמה</span>}
+            <span class="badge badge-free">מדריך חינם</span>
+          </div>
+          <h1>{title}</h1>
+          <p class="guide-promise">{promise}</p>
+        </div>
+        {cover && (
+          <div class="guide-hero-cover">
+            <img src={cover} alt={featuredImageAlt || title} width="1080" height="1920" />
+          </div>
+        )}
+      </div>
     </div>
   </section>
 
@@ -74,11 +87,9 @@ const jsonLd = {
       </div>
     )}
 
-    {featuredImage && (
+    {!cover && featuredImage && (
       <img class="guide-featured" src={featuredImage} alt={featuredImageAlt || title} width="1600" height="900" />
     )}
-
-    <p class="guide-promise">{promise}</p>
 
     <div class="guide-layout">
       <div class="guide-main">
