@@ -14,7 +14,12 @@ import { visit } from 'unist-util-visit';
  *  a paragraph containing only a link to /downloads/...  -> download button
  */
 export function rehypeGuideComponents() {
-  return (tree) => {
+  return (tree, file) => {
+    const guideTitle = file?.data?.astro?.frontmatter?.title || '';
+    const waNumber = '972547737333';
+    const waText = guideTitle ? `היי אסיף, קראתי את המדריך "${guideTitle}" ונתקעתי בשלב של הפרומפט` : 'היי אסיף, יש לי שאלה על אחד המדריכים';
+    const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+    let promptCount = 0;
     // 1. ```prompt fenced code blocks -> copy-to-clipboard prompt box
     visit(tree, 'element', (node, index, parent) => {
       if (
@@ -62,6 +67,20 @@ export function rehypeGuideComponents() {
             ],
           };
           parent.children[index] = wrapper;
+          promptCount += 1;
+          if (promptCount === 1) {
+            // Soft mid-guide contact box right after the first prompt — the moment most questions come up.
+            parent.children.splice(index + 1, 0, {
+              type: 'element',
+              tagName: 'aside',
+              properties: { className: ['mid-cta'] },
+              children: [
+                { type: 'element', tagName: 'p', properties: { className: ['mid-cta-text'] }, children: [{ type: 'text', value: 'נתקעתם בשלב הזה, או שיש שאלה על העסק שלכם? שאלה קצרה בוואטסאפ – עונה אישית, בחינם.' }] },
+                { type: 'element', tagName: 'a', properties: { href: waHref, className: ['mid-cta-link'], target: '_blank', rel: 'noopener' }, children: [{ type: 'text', value: 'לשאול בוואטסאפ ←' }] },
+              ],
+            });
+            return index + 2;
+          }
         }
       }
     });

@@ -1,7 +1,13 @@
 ---
-import { SITE } from '../config/site';
+import { SITE, whatsappUrl } from '../config/site';
 
-const url = SITE.consultUrl.trim();
+interface Props {
+  /** Guide title: pre-fills the WhatsApp message so the source guide is known. */
+  context?: string;
+}
+const { context } = Astro.props;
+
+const url = context ? whatsappUrl(context) : SITE.consultUrl.trim();
 const external = /^https?:\/\//.test(url);
 ---
 
@@ -15,5 +21,6 @@ const external = /^https?:\/\//.test(url);
     >
       {SITE.consultLabel}
     </a>
+    <p class="consult-sub">עונה אישית בוואטסאפ, בלי התחייבות ובלי עלות.</p>
   </div>
 )}

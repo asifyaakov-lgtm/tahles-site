@@ -6,6 +6,7 @@ import EmailSignup from '../../components/EmailSignup.astro';
 import FollowBlock from '../../components/FollowBlock.astro';
 import RelatedGuides from '../../components/RelatedGuides.astro';
 import ConsultButton from '../../components/ConsultButton.astro';
+import WhatsAppFloat from '../../components/WhatsAppFloat.astro';
 import { SITE } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -96,7 +97,7 @@ const jsonLd = {
 
         {SITE.emailSignupAction.trim() && <EmailSignup idSuffix="guide-main" />}
 
-        <ConsultButton />
+        <ConsultButton context={title} />
 
         <div style="margin-top: 56px;">
           <RelatedGuides guides={related} />
@@ -104,4 +105,5 @@ const jsonLd = {
       </div>
     </div>
   </div>
+  <WhatsAppFloat context={title} />
 </BaseLayout>

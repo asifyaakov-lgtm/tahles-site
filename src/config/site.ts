@@ -19,9 +19,12 @@ export const SITE = {
   photo: '/images/asif.jpg',
   photoAlt: "אסיף יעקב, תכל'ס AI",
 
+  // Dedicated business WhatsApp number (international format, digits only). Every consult CTA
+  // on the site opens a wa.me chat to this number with a pre-filled message (see whatsappUrl()).
+  whatsappNumber: '972547737333',
   // Consult CTA. Any URL (mailto:, https://wa.me/..., a booking page). Empty = button hidden.
-  consultUrl: 'mailto:Asif@tahles.ai?subject=%D7%94%D7%AA%D7%99%D7%99%D7%A2%D7%A6%D7%95%D7%AA%20AI%20%D7%9C%D7%A2%D7%A1%D7%A7',
-  consultLabel: 'לחץ פה להתייעץ איך לוקחים את העסק שלך קדימה בעולם ה-AI',
+  consultUrl: 'https://wa.me/972547737333?text=' + encodeURIComponent('היי אסיף, אשמח לייעוץ חינם איך לקחת את העסק שלי צעד אחד קדימה עם AI'),
+  consultLabel: 'ייעוץ חינם: איך לוקחים את העסק שלך צעד אחד קדימה בעולם ה-AI',
 
   // Provider-agnostic email signup. Leave empty to show the "עקבו אחריי" social block instead
   // of a form that would silently drop submissions. Point this at the real MailerLite form
@@ -46,3 +49,12 @@ export const SEGMENT_OPTIONS = [
 
 // Guide categories (frontmatter `category`). Single source of truth for the schema and filter chips.
 export const GUIDE_CATEGORIES = ['לקוחות', 'שיווק', 'ניהול', 'עדכונים'] as const;
+
+// WhatsApp deep link with a pre-filled message. Pass the guide title so Asif knows which
+// guide the person was reading when they reached out.
+export function whatsappUrl(context?: string): string {
+  const text = context
+    ? `היי אסיף, קראתי את המדריך "${context}" ויש לי שאלה`
+    : 'היי אסיף, אשמח לייעוץ חינם איך לקחת את העסק שלי צעד אחד קדימה עם AI';
+  return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(text)}`;
+}
