@@ -1,0 +1,16 @@
+# Guides go live by publishDate at build time, so the site must rebuild once a day even
+# without a push. Add the Cloudflare Pages deploy hook URL as the repo secret CF_DEPLOY_HOOK
+# (Cloudflare → Pages → tahles-site → Settings → Builds & deployments → Deploy hooks).
+name: daily-rebuild
+on:
+  schedule:
+    - cron: '55 4 * * *'    # 07:55 IL (after the 07:45 post)
+    - cron: '40 6 * * 5'    # Fri 09:40 IL
+    - cron: '40 17 * * *'   # 20:40 IL (after the 20:30 post)
+    - cron: '55 17 * * 6'   # Sat 20:55 IL
+  workflow_dispatch:
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -X POST "${{ secrets.CF_DEPLOY_HOOK }}"

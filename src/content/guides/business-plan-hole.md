@@ -7,7 +7,7 @@ description: "מדריך פרקטי: איך לתת ל-ChatGPT או קלוד לב
 featuredImage: "/images/guides/business-plan-hole-featured.jpg"
 cover: "/images/covers/business-plan-hole.jpg"
 featuredImageAlt: "בלש עם זכוכית מגדלת מעל תוכנית עסקית עם חור בוער"
-publishDate: 2026-10-15
+publishDate: 2026-10-20T07:45:00+03:00
 summary: "תוכנית עסקית נכשלת בגלל הנחה אחת או שתיים שאף אחד לא בדק. הפרומפט במדריך מכריח את הבינה המלאכותית לשחק את היועץ שלא מחמיא, לשלוף את שלוש ההנחות המסוכנות ולתת לכם שאלת אימות אחת לכל אחת. זה לא מחליף יועץ, אבל זה שעה של עבודה שחוסכת שנה של טעות."
 draft: false
 ---

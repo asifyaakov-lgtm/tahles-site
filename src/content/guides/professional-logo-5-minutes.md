@@ -7,7 +7,7 @@ description: "מדריך פרקטי ליצירת לוגו עם ChatGPT, Claude �
 featuredImage: "/images/guides/professional-logo-5-minutes-featured.jpg"
 cover: "/images/covers/professional-logo-5-minutes.jpg"
 featuredImageAlt: "שלושה כיווני לוגו למספרה שיצאו מהבינה אחרי חמש שאלות"
-publishDate: 2026-10-21
+publishDate: 2026-10-24T20:45:00+03:00
 summary: "לוגו גנרי יוצא כשמבקשים 'תעשה לי לוגו'. לוגו טוב יוצא כשהבינה קודם שואלת: מי הלקוח, איזה סגנון, אילו צבעים, מה המתחרים עושים ומה אסור. אחר כך מבקשים שלושה כיוונים שונים עם הסבר במשפט לכל אחד, בוחרים, ומבקשים גרסת אייקון וגרסה בשחור-לבן. ולפני הדפסה – מראים לשלושה אנשים ושואלים 'מה העסק הזה עושה?'"
 draft: false
 ---

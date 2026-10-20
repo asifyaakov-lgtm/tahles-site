@@ -8,6 +8,7 @@ import RelatedGuides from '../../components/RelatedGuides.astro';
 import ConsultButton from '../../components/ConsultButton.astro';
 import WhatsAppFloat from '../../components/WhatsAppFloat.astro';
 import { SITE } from '../../config/site';
+import { isLive } from '../../lib/guides';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides', ({ data }) => !data.draft);
@@ -17,7 +18,9 @@ export async function getStaticPaths() {
   }));
 }
 
-const { guide, allGuides } = Astro.props;
+const { guide, allGuides: builtGuides } = Astro.props;
+const allGuides = builtGuides.filter((g) => isLive(g.data));
+const unlisted = !isLive(guide.data);
 const { Content, headings } = await guide.render();
 const { title, promise, description, featuredImage, featuredImageAlt, cover, summary, sample, category, publishDate } = guide.data;
 
@@ -58,6 +61,7 @@ const jsonLd = {
   type="article"
   publishedTime={publishDate}
   jsonLd={jsonLd}
+  noindex={unlisted}
 >
   <section class="guide-hero">
     <div class="container">

@@ -7,7 +7,7 @@ description: "מדריך פרקטי: איך לתת ל-ChatGPT או קלוד עם
 featuredImage: "/images/guides/competitor-report-10-minutes-featured.jpg"
 cover: "/images/covers/competitor-report-10-minutes.jpg"
 featuredImageAlt: "מחזיק דוח מתחרים של 10 דקות וחשבונית ייעוץ מחוקה"
-publishDate: 2026-10-19
+publishDate: 2026-10-23T09:30:00+03:00
 summary: "נותנים לבינה עם גלישה 3–5 שמות של מתחרים ובקשה אחת מדויקת – מה להשוות (מחירים, שעות, מבצעי היכרות, ביקורות) ומה לחפש (חור שאף אחד לא ממלא). תוך עשר דקות יש טבלה ושלוש תובנות, ואת המבצע הבא בונים סביב מה שהשוק באמת מפספס – לא סביב ניחוש."
 draft: false
 ---

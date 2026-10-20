@@ -7,7 +7,7 @@ description: "מדריך פרקטי: איך לבדוק מה ChatGPT יודע ע�
 featuredImage: "/images/guides/found-in-ai-search-featured.jpg"
 cover: "/images/covers/found-in-ai-search.jpg"
 featuredImageAlt: "פודיום: המקום הראשון מסומן אתה, שני ושלישי המתחרה"
-publishDate: 2026-10-17
+publishDate: 2026-10-21T20:30:00+03:00
 summary: "הבינה לא ממציאה המלצות – היא מלקטת אותן ממה שכתוב עליכם ברשת. אם התיאור שלכם קצר, שונה בכל מקום או חסר ביקורות, אתם פשוט לא קיימים בתשובה. בודקים עם פרומפט אחד מי מומלץ ולמה, כותבים תיאור אחד זהה לשלושה מקומות, אוספים עשר ביקורות, ובודקים שוב אחרי חודש."
 draft: false
 ---

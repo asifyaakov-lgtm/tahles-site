@@ -3,9 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import { getCollection } from 'astro:content';
+import { isLive } from '../../lib/guides';
 import { GUIDE_CATEGORIES } from '../../config/site';
 
-const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+const allGuides = (await getCollection('guides', ({ data }) => isLive(data))).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 // Only offer chips for categories that actually have a published guide.

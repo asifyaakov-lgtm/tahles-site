@@ -7,7 +7,7 @@ description: "מדריך פרקטי לבעלי עסקים: איך נרשמים �
 featuredImage: "/images/guides/remove-phone-from-spam-lists-featured.jpg"
 cover: "/images/covers/remove-phone-from-spam-lists.jpg"
 featuredImageAlt: "טלפון עסקי עם מגן שחוסם שיחות שיווק"
-publishDate: 2026-10-21
+publishDate: 2026-10-25T07:45:00+03:00
 summary: "הדבר הראשון: רישום חינמי למאגר 'אל תתקשר אליי' – מרגע הרישום אסור למשווקים להתקשר, ואפשר להתלונן אחרי 15 יום. הדבר השני, שאף אחד לא עושה: המספר כבר נמצא במאגרים שנמכרו הלאה. הבינה מאתרת איפה הוא מופיע, מנסחת בקשת הסרה לפי חוק הגנת הפרטיות לכל אחד, ואחרי שבועיים מזכירה למי לא ענה. תוך חודש הטלפון שקט."
 draft: false
 ---

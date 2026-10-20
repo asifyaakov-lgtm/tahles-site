@@ -7,7 +7,7 @@ description: "מדריך פרקטי: איך לגרום ל-ChatGPT או קלוד 
 featuredImage: "/images/guides/ai-attack-your-plan-featured.jpg"
 cover: "/images/covers/ai-attack-your-plan.jpg"
 featuredImageAlt: "מתאגרף מול כפפת אגרוף סגולה עשויה קוד"
-publishDate: 2026-10-16
+publishDate: 2026-10-20T20:30:00+03:00
 summary: "כשמבקשים מהבינה חוות דעת מקבלים הסכמה. כשנותנים לה תפקיד של יריב מקבלים את האמת. שלושה יריבים – מתחרה, לקוח מאוכזב, בנקאי – מכסים את שלושת הכיוונים שמהם עסקים קטנים נופלים: השוק, השירות והמספרים. מריצים לפני כל החלטה גדולה, ושוב אחרי כל תיקון."
 draft: false
 ---

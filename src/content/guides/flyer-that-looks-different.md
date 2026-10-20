@@ -7,7 +7,7 @@ description: "מדריך פרקטי בשני שלבים: איך לגרום ל-Ch
 featuredImage: "/images/guides/flyer-that-looks-different-featured.jpg"
 cover: "/images/covers/flyer-that-looks-different.jpg"
 featuredImageAlt: "פורץ מקיר של פליירים אפורים זהים ומחזיק פלייר צהוב"
-publishDate: 2026-10-17
+publishDate: 2026-10-21T07:45:00+03:00
 summary: "כשמבקשים מהבינה 'תעשה פלייר למספרה' מקבלים את הפלייר של כל המספרות. כשעונים קודם על חמש שאלות על העסק – מה הלקוחות אומרים, מה עושים אחרת, מה אסור להראות – מקבלים פלייר שרק אתם יכולים להוציא. שלב 1 תחקיר בצ'אט, שלב 2 עיצוב, שלב 3 בדיקה עם שני לקוחות."
 draft: false
 ---

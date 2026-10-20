@@ -7,9 +7,10 @@ import EmailSignup from '../components/EmailSignup.astro';
 import EmptyState from '../components/EmptyState.astro';
 import ConsultButton from '../components/ConsultButton.astro';
 import { getCollection } from 'astro:content';
+import { isLive } from '../lib/guides';
 import { SITE } from '../config/site';
 
-const allGuides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+const allGuides = (await getCollection('guides', ({ data }) => isLive(data))).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
 );
 const latest = allGuides.slice(0, 6);

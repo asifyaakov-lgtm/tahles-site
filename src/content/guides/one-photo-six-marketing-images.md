@@ -7,7 +7,7 @@ description: "מדריך פרקטי: איך להעלות תמונת מוצר א�
 featuredImage: "/images/guides/one-photo-six-marketing-images-featured.jpg"
 cover: "/images/covers/one-photo-six-marketing-images.jpg"
 featuredImageAlt: "פס ייצור שמוציא מתמונת טלפון אחת שש תמונות שיווק של טבעת"
-publishDate: 2026-10-20
+publishDate: 2026-10-22T20:30:00+03:00
 summary: "לא צריך צלם: תמונה אחת סבירה מהטלפון, ואז שש פקודות קצרות באותה שיחה – סטודיו לבן, יד ליד קפה, שלט חוצות, קופסת מתנה, פלאט-ליי, מאקרו. הכלל היחיד שחוזר בכל פקודה: 'תשאיר את המוצר בדיוק כמו שהוא'. בלעדיו הבינה מעצבת מוצר חדש, איתו – היא מחליפה רק את העולם מסביב."
 draft: false
 ---
