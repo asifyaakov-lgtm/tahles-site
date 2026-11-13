@@ -1,0 +1,225 @@
+---
+// Pillar page (SEO hub): "בינה מלאכותית לעסקים בעברית ובחינם".
+// Targets the high-volume, low-difficulty Israeli searches found in Ubersuggest (Nov 2026):
+// "בינה מלאכותית בעברית חינם", "בינה מלאכותית חינם", "צ'אט ג'י פי טי בעברית",
+// "בינה מלאכותית לעסקים", "בינה מלאכותית תמונות".
+// Every live guide is listed here automatically by category, and every guide links back here
+// (see src/pages/guides/[slug].astro), so new guides join the cluster with no extra work.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GuideCard from '../components/GuideCard.astro';
+import ConsultButton from '../components/ConsultButton.astro';
+import FollowBlock from '../components/FollowBlock.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { isLive } from '../lib/guides';
+import { SITE } from '../config/site';
+
+const guides = (await getCollection('guides', ({ data }) => isLive(data))).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const clusters = [
+  {
+    id: 'customers',
+    category: 'לקוחות',
+    title: 'בינה מלאכותית לשירות לקוחות',
+    intro:
+      'עונים מהר יותר, בסגנון שלכם, בלי לשבת על הטלפון כל היום: עוזר וואטסאפ שעונה במקומכם, הודעות והצעות מחיר שנשמעות כמוכם ולא כמו רובוט.',
+  },
+  {
+    id: 'marketing',
+    category: 'שיווק',
+    title: 'בינה מלאכותית לשיווק ולתמונות',
+    intro:
+      'תמונות מוצר, פרסומות, פליירים ולוגו בלי מעצב ובלי צלם. ואיך העסק שלכם מופיע כשמישהו שואל את צ\'אט ג\'י פי טי מי מומלץ בתחום.',
+  },
+  {
+    id: 'management',
+    category: 'ניהול',
+    title: 'בינה מלאכותית לניהול העסק',
+    intro:
+      'בודקים תוכנית עסקית לפני שהכסף נגמר, מקבלים דוח מתחרים בעשר דקות, ומחזיקים את כל הקבצים של העסק במקום אחד שאפשר לשאול בעברית.',
+  },
+  {
+    id: 'updates',
+    category: 'עדכונים',
+    title: 'עדכונים חשובים לבעלי עסקים',
+    intro: 'כלים חדשים ושינויים שכדאי להכיר, עם ההסבר מה זה נותן לעסק שלכם בפועל.',
+  },
+]
+  .map((c) => ({ ...c, items: guides.filter((g) => g.data.category === c.category) }))
+  .filter((c) => c.items.length > 0);
+
+const tools = [
+  {
+    name: "צ'אט ג'י פי טי (ChatGPT)",
+    text: 'הכלי המוכר ביותר. עובד מצוין בעברית, יש לו גרסה חינמית, והוא טוב לכתיבת הודעות, רעיונות, תמונות ושאלות כלליות.',
+  },
+  {
+    name: 'קלוד (Claude)',
+    text: 'עוזר הכתיבה והחשיבה של חברת אנתרופיק. יש לו גרסה חינמית, והוא חזק במיוחד בכתיבה טבעית בעברית, בקריאת מסמכים ארוכים ובביקורת עניינית.',
+  },
+  {
+    name: "ג'מיני (Gemini)",
+    text: 'הבינה המלאכותית של גוגל. יש לה גרסה חינמית, היא מחוברת לחשבון הגוגל שלכם, וטובה במיוחד ביצירת תמונות ובעבודה עם מסמכים בדרייב.',
+  },
+  {
+    name: 'נוטבוק אל אם (NotebookLM)',
+    text: 'כלי חינמי של גוגל שעונה רק מתוך הקבצים שתעלו: מחירון, חוזה, תקנון. מתאים כשצריך תשובות מדויקות על העסק שלכם ולא תשובות כלליות.',
+  },
+];
+
+const faq = [
+  {
+    q: 'האם יש בינה מלאכותית בעברית בחינם?',
+    a: "כן. צ'אט ג'י פי טי, קלוד, ג'מיני ונוטבוק אל אם עובדים בעברית, ולכל אחד מהם יש גרסה חינמית שמספיקה כדי להתחיל. כל המדריכים באתר עובדים עם הגרסאות החינמיות.",
+  },
+  {
+    q: "האם צ'אט ג'י פי טי עובד בעברית?",
+    a: 'כן. אפשר לכתוב לו בעברית ולקבל תשובות בעברית. כדי שהתשובה תהיה טובה, כתבו לו מי אתם, מה העסק, ולמה אתם צריכים את התשובה.',
+  },
+  {
+    q: 'איזה כלי בינה מלאכותית הכי טוב לעסק קטן?',
+    a: "אין כלי אחד שמנצח בכל דבר. לכתיבה ולשירות לקוחות צ'אט ג'י פי טי או קלוד, לתמונות ג'מיני או צ'אט ג'י פי טי, ולשאלות על המסמכים של העסק נוטבוק אל אם. מתחילים בכלי אחד ומשימה אחת שחוזרת כל שבוע.",
+  },
+  {
+    q: 'צריך ידע טכני כדי להשתמש בבינה מלאכותית בעסק?',
+    a: 'לא. כותבים לבינה בעברית רגילה, כמו לעובד חדש. בכל מדריך באתר יש פרומפט מוכן להעתקה והדבקה, בלי קוד ובלי התקנות.',
+  },
+  {
+    q: 'מותר להכניס לבינה מלאכותית מידע על לקוחות?',
+    a: 'כדאי להיזהר. אל תדביקו תעודות זהות, מספרי כרטיסי אשראי או מידע רפואי. לרוב המשימות מספיק לכתוב "לקוח" או "לקוחה" בלי שם.',
+  },
+];
+
+const title = "בינה מלאכותית לעסקים בעברית ובחינם: המדריך המלא לבעלי עסקים";
+const description =
+  "בינה מלאכותית בעברית ובחינם לבעלי עסקים קטנים בישראל: אילו כלים עובדים בעברית, מאיפה מתחילים, וכל המדריכים הפרקטיים עם פרומפטים להעתקה לשירות לקוחות, שיווק, תמונות וניהול.";
+
+const pageUrl = new URL('/ai-for-business', SITE.domain).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': pageUrl,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'he',
+      author: { '@type': 'Person', name: 'אסיף יעקב', url: SITE.domain },
+      publisher: { '@type': 'Organization', name: SITE.name, url: SITE.domain },
+    },
+    {
+      '@type': 'ItemList',
+      name: 'מדריכי בינה מלאכותית לעסקים',
+      itemListElement: guides.map((g, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: new URL(`/guides/${g.slug}`, SITE.domain).toString(),
+        name: g.data.title,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <section class="guide-hero">
+    <div class="container">
+      <div class="guide-hero-card">
+        <div class="guide-hero-text">
+          <div class="guide-hero-badges">
+            <span class="badge">המדריך המלא</span>
+            <span class="badge badge-free">בחינם</span>
+          </div>
+          <h1>בינה מלאכותית לעסקים, בעברית ובחינם</h1>
+          <p class="guide-promise">
+            כל מה שבעל עסק קטן בישראל צריך כדי להתחיל לעבוד עם בינה מלאכותית: אילו כלים עובדים בעברית בחינם,
+            מאיפה מתחילים, ו-{guides.length} מדריכים פרקטיים עם פרומפט מוכן להעתקה.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <article class="prose" style="max-width: 820px; margin-inline: auto;">
+      <nav aria-label="תוכן העניינים">
+        <h2>מה תמצאו כאן</h2>
+        <ul>
+          <li><a href="#why">למה בינה מלאכותית לעסק קטן</a></li>
+          <li><a href="#tools">כלי בינה מלאכותית בעברית בחינם</a></li>
+          <li><a href="#start">איך מתחילים בשלושה צעדים</a></li>
+          {clusters.map((c) => <li><a href={`#${c.id}`}>{c.title}</a></li>)}
+          <li><a href="#faq">שאלות נפוצות</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="why">למה בינה מלאכותית לעסק קטן</h2>
+      <p>
+        בינה מלאכותית לא תחליף את העסק שלכם. עסק שמשתמש בה כן. היא לא דורשת תקציב או ידע טכני: כותבים לה בעברית
+        רגילה, כמו לעובד חדש, והיא עונה ללקוחות, כותבת פרסומות, מעצבת תמונות ובודקת תוכניות. מה שלקח שעה לוקח
+        עכשיו חמש דקות, ומה שהייתם משלמים עליו למעצב או ליועץ אפשר לעשות לבד.
+      </p>
+      <p>
+        הבעיה היא לא הכלים. הבעיה היא לדעת מה בדיוק לבקש. בשביל זה נבנה האתר הזה: כל מדריך לוקח משימה אחת אמיתית
+        של עסק קטן ונותן את הפרומפט המדויק, דוגמה אמיתית, ומה הבינה לא יודעת לעשות.
+      </p>
+
+      <h2 id="tools">כלי בינה מלאכותית בעברית בחינם</h2>
+      <p>ארבעת הכלים האלה עובדים בעברית, ולכל אחד יש גרסה חינמית שמספיקה לכל המדריכים באתר:</p>
+      <ul>
+        {tools.map((t) => (
+          <li><strong>{t.name}</strong>: {t.text}</li>
+        ))}
+      </ul>
+
+      <h2 id="start">איך מתחילים בשלושה צעדים</h2>
+      <ol>
+        <li>בוחרים משימה אחת שחוזרת כל שבוע ולוקחת לכם זמן: מענה ללקוחות, פוסט לפייסבוק, הצעת מחיר.</li>
+        <li>פותחים מדריך אחד מהרשימה למטה ומעתיקים את הפרומפט המוכן לצ'אט ג'י פי טי, לקלוד או לג'מיני.</li>
+        <li>אומרים לבינה מי אתם, מה העסק ולמה אתם צריכים את התשובה. זה המשפט שהופך תשובה כללית לתשובה שעובדת.</li>
+      </ol>
+    </article>
+
+    {clusters.map((c) => (
+      <section class="section" id={c.id}>
+        <div class="section-heading">
+          <h2>{c.title}</h2>
+          <p>{c.intro}</p>
+        </div>
+        <div class="card-grid">
+          {c.items.map((guide) => (
+            <GuideCard guide={guide} />
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <article class="prose" style="max-width: 820px; margin-inline: auto;">
+      <h2 id="faq">שאלות נפוצות על בינה מלאכותית לעסקים</h2>
+      {faq.map((f) => (
+        <>
+          <h3>{f.q}</h3>
+          <p>{f.a}</p>
+        </>
+      ))}
+    </article>
+
+    <FollowBlock />
+    <ConsultButton />
+    <p style="text-align:center; margin: 32px 0 56px;">
+      <a href="/guides" class="btn btn-outline">לכל המדריכים</a>
+    </p>
+  </div>
+  <WhatsAppFloat />
+</BaseLayout>

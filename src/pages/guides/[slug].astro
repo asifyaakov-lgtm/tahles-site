@@ -24,6 +24,15 @@ const unlisted = !isLive(guide.data);
 const { Content, headings } = await guide.render();
 const { title, promise, description, featuredImage, featuredImageAlt, cover, summary, sample, category, publishDate } = guide.data;
 
+// Internal link back to the pillar page (SEO hub), anchored to this guide's category section.
+const hubAnchors: Record<string, { id: string; label: string }> = {
+  'לקוחות': { id: 'customers', label: 'בינה מלאכותית לשירות לקוחות' },
+  'שיווק': { id: 'marketing', label: 'בינה מלאכותית לשיווק ולתמונות' },
+  'ניהול': { id: 'management', label: 'בינה מלאכותית לניהול העסק' },
+  'עדכונים': { id: 'updates', label: 'עדכונים חשובים לבעלי עסקים' },
+};
+const hub = category ? hubAnchors[category] : undefined;
+
 const byNewest = (a: (typeof allGuides)[number], b: (typeof allGuides)[number]) =>
   b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
 const others = allGuides.filter((g) => g.slug !== guide.slug).sort(byNewest);
@@ -106,6 +115,9 @@ const jsonLd = {
         <section class="section" style="padding-block: 32px 0;">
           <h2>סיכום</h2>
           <p style="color: var(--text-dim);">{summary}</p>
+          <p style="margin-top: 16px;">
+            המדריך הזה הוא חלק מ<a href="/ai-for-business">המדריך המלא לבינה מלאכותית לעסקים בעברית ובחינם</a>{hub && <>, שם תמצאו את כל המדריכים בנושא <a href={`/ai-for-business#${hub.id}`}>{hub.label}</a></>}.
+          </p>
         </section>
 
         <FollowBlock />
