@@ -7,7 +7,7 @@ description: "נמאס לכתוב את אותו מייל בפעם המאה? מד
 featuredImage: "/images/guides/grok-tsevet-ozrim-shalosh-hodaot-featured.jpg"
 cover: "/images/covers/grok-tsevet-ozrim-shalosh-hodaot.jpg"
 featuredImageAlt: "ראש צוות בגרוק מחלק משימות לעוזרים למיילים, למחקר ולתכנון השבוע."
-publishDate: 2030-01-01T00:00:00+02:00
+publishDate: 2026-11-18T14:30:35+02:00
 summary: "במקום לכתוב את אותו מייל בפעם המאה, מדביקים בגרוק שלוש הודעות באותו צ'אט. בהודעה הראשונה גרוק מראיין אתכם על העבודה, על היעדים ועל המשימות שחוזרות כל שבוע. בהודעה השנייה הוא מציע עד ארבעה עוזרים שבאמת צריך. בשלישית הוא בונה לכל עוזר תפקיד ברור, הוראות קבועות והסבר איך לחבר אותו לכלים שכבר יש לכם."
 draft: false
 relatedGuides: ["ai-customer-emails", "competitor-report-10-minutes"]
