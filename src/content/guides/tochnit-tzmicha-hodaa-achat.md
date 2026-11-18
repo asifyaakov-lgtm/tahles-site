@@ -7,7 +7,7 @@ description: "פותחים פרויקט בצ'אט ג'יפיטי, מדביקים 
 featuredImage: "/images/guides/tochnit-tzmicha-hodaa-achat-featured.jpg"
 cover: "/images/covers/tochnit-tzmicha-hodaa-achat.jpg"
 featuredImageAlt: "תוכנית צמיחה שבועית בטבלה בתוך פרויקט בצ'אט ג'יפיטי."
-publishDate: 2030-01-01T00:00:00+02:00
+publishDate: 2026-11-18T18:30:40+02:00
 summary: "במדריך הזה פותחים מרחב עבודה (פרויקט) בצ'אט ג'יפיטי ומדביקים בו קישור לאתר של העסק. הבינה קוראת את האתר ובונה תוכנית צמיחה לשלושה חודשים, עם יעד שאפשר למדוד ומשימות לכל שבוע. באותו מקום מבקשים עשרה תכנים לרשתות ושלושה דפי אתר חדשים, אחד לכל שירות. בסוף מזמינים את הצוות, וכולם עובדים יחד על אותם קבצים."
 draft: false
 relatedGuides: ["ai-writes-in-your-voice", "competitor-report-10-minutes"]
